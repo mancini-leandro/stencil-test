@@ -6,30 +6,18 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
-    }
     interface MyInstance {
+        /**
+          * prop lastName
+         */
+        "lastName": string;
+        /**
+          * prop name
+         */
+        "name": string;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
-    }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
-    };
     interface HTMLMyInstanceElement extends Components.MyInstance, HTMLStencilElement {
     }
     var HTMLMyInstanceElement: {
@@ -37,29 +25,21 @@ declare global {
         new (): HTMLMyInstanceElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
         "my-instance": HTMLMyInstanceElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
-    }
     interface MyInstance {
+        /**
+          * prop lastName
+         */
+        "lastName"?: string;
+        /**
+          * prop name
+         */
+        "name"?: string;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
         "my-instance": MyInstance;
     }
 }
@@ -67,7 +47,6 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "my-instance": LocalJSX.MyInstance & JSXBase.HTMLAttributes<HTMLMyInstanceElement>;
         }
     }
