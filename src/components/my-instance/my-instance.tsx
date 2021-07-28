@@ -1,4 +1,4 @@
-import { Component, Prop } from '@stencil/core';
+import { Component, Host, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'my-instance',
@@ -20,6 +20,14 @@ export class MyInstance {
 
   format(): string {
     return [this.name, this.lastName].join(' ');
+  }
+
+  render() {
+    return (
+      <Host>
+        <p>Meu nome é: {this.format()}</p>
+      </Host>
+    );
   }
 
 }
