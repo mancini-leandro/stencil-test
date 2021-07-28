@@ -6,6 +6,12 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface MyComplexProp {
+        /**
+          * Values prop
+         */
+        "values": Array<string>;
+    }
     interface MyInstance {
         /**
           * prop lastName
@@ -18,6 +24,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLMyComplexPropElement extends Components.MyComplexProp, HTMLStencilElement {
+    }
+    var HTMLMyComplexPropElement: {
+        prototype: HTMLMyComplexPropElement;
+        new (): HTMLMyComplexPropElement;
+    };
     interface HTMLMyInstanceElement extends Components.MyInstance, HTMLStencilElement {
     }
     var HTMLMyInstanceElement: {
@@ -25,10 +37,17 @@ declare global {
         new (): HTMLMyInstanceElement;
     };
     interface HTMLElementTagNameMap {
+        "my-complex-prop": HTMLMyComplexPropElement;
         "my-instance": HTMLMyInstanceElement;
     }
 }
 declare namespace LocalJSX {
+    interface MyComplexProp {
+        /**
+          * Values prop
+         */
+        "values"?: Array<string>;
+    }
     interface MyInstance {
         /**
           * prop lastName
@@ -40,6 +59,7 @@ declare namespace LocalJSX {
         "name"?: string;
     }
     interface IntrinsicElements {
+        "my-complex-prop": MyComplexProp;
         "my-instance": MyInstance;
     }
 }
@@ -47,6 +67,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "my-complex-prop": LocalJSX.MyComplexProp & JSXBase.HTMLAttributes<HTMLMyComplexPropElement>;
             "my-instance": LocalJSX.MyInstance & JSXBase.HTMLAttributes<HTMLMyInstanceElement>;
         }
     }
