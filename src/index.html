@@ -15,10 +15,16 @@
 
     <my-complex-prop id="comp"></my-complex-prop>
 
+    <my-event></my-event>
+
     <script>
       const comp = document.getElementById('comp');
 
       comp.values = ['Leandro', 'Mancini'];
+
+      window.addEventListener('buttonClicked', (e) => {
+        console.log(e);
+      });
     </script>
   </body>
 </html>

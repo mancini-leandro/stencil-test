@@ -12,6 +12,9 @@ export namespace Components {
          */
         "values": Array<string>;
     }
+    interface MyEvent {
+        "updateFace": (value: string) => Promise<void>;
+    }
     interface MyInstance {
         /**
           * prop lastName
@@ -30,6 +33,12 @@ declare global {
         prototype: HTMLMyComplexPropElement;
         new (): HTMLMyComplexPropElement;
     };
+    interface HTMLMyEventElement extends Components.MyEvent, HTMLStencilElement {
+    }
+    var HTMLMyEventElement: {
+        prototype: HTMLMyEventElement;
+        new (): HTMLMyEventElement;
+    };
     interface HTMLMyInstanceElement extends Components.MyInstance, HTMLStencilElement {
     }
     var HTMLMyInstanceElement: {
@@ -38,6 +47,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "my-complex-prop": HTMLMyComplexPropElement;
+        "my-event": HTMLMyEventElement;
         "my-instance": HTMLMyInstanceElement;
     }
 }
@@ -47,6 +57,9 @@ declare namespace LocalJSX {
           * Values prop
          */
         "values"?: Array<string>;
+    }
+    interface MyEvent {
+        "onButtonClicked"?: (event: CustomEvent<boolean>) => void;
     }
     interface MyInstance {
         /**
@@ -60,6 +73,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "my-complex-prop": MyComplexProp;
+        "my-event": MyEvent;
         "my-instance": MyInstance;
     }
 }
@@ -68,6 +82,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-complex-prop": LocalJSX.MyComplexProp & JSXBase.HTMLAttributes<HTMLMyComplexPropElement>;
+            "my-event": LocalJSX.MyEvent & JSXBase.HTMLAttributes<HTMLMyEventElement>;
             "my-instance": LocalJSX.MyInstance & JSXBase.HTMLAttributes<HTMLMyInstanceElement>;
         }
     }
