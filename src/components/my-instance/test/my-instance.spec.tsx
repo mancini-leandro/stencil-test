@@ -2,6 +2,12 @@ import { newSpecPage } from '@stencil/core/testing';
 import { MyInstance } from '../my-instance';
 
 describe('my-instance', () => {
+  const html = `
+    <my-instance name="Leandro" last-name="Mancini">
+      <p class="cool">Está frio</p>
+    </my-instance>
+  `;
+
   it('should format the name', () => {
     let comp = new MyInstance();
 
@@ -11,18 +17,28 @@ describe('my-instance', () => {
     expect(comp.format()).toEqual('Leandro Mancini');
   });
 
-  it('should render', async () => {
+  it('should render with shadow dom', async () => {
     const page = await newSpecPage({
-      html: '<my-instance name="Leandro" last-name="Mancini"></my-instance>',
+      html,
       components: [MyInstance]
     });
 
-    expect(page.root).toEqualHtml(`
-      <my-instance name=\"Leandro\" last-name=\"Mancini\">
-        <mock:shadow-root>
-          <p>Meu nome é: Leandro Mancini</p>
-        </mock:shadow>
-      </my-instance>
-    `);
+    expect(page.root.shadowRoot).toBeTruthy();
+    expect(page.root.querySelector('.name')).toBeFalsy();
+    expect(page.root.shadowRoot.querySelector('.name')).toBeTruthy();
+    expect(page.root.querySelector('.cool')).toBeTruthy();
+    expect(page.root).toMatchSnapshot();
+  });
+
+  it('should render without shadow dom', async () => {
+    const page = await newSpecPage({
+      html,
+      components: [MyInstance],
+      supportsShadowDom: false
+    });
+
+    expect(page.root.shadowRoot).toBeFalsy();
+    expect(page.root.querySelector('.name')).toBeTruthy();
+    expect(page.root.querySelector('.cool')).toBeTruthy();
   });
 });

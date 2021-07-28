@@ -25,7 +25,8 @@ export class MyInstance {
   render() {
     return (
       <Host>
-        <p>Meu nome é: {this.format()}</p>
+        <p class="name">Meu nome é: {this.format()}</p>
+        <slot />
       </Host>
     );
   }
