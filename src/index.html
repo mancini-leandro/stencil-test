@@ -9,24 +9,6 @@
     <script nomodule src="/build/stencil-test.js"></script>
   </head>
   <body>
-    <my-instance name="Leandro" last-name="Mancini">
-      <p class="cool">Está frio</p>
-    </my-instance>
-
-    <my-complex-prop id="comp"></my-complex-prop>
-
-    <my-event></my-event>
-
-    <my-input value="Leandro"></my-input>
-
-    <script>
-      const comp = document.getElementById('comp');
-
-      comp.values = ['Leandro', 'Mancini'];
-
-      window.addEventListener('buttonClicked', (e) => {
-        console.log(e);
-      });
-    </script>
+    <test-render></test-render>
   </body>
 </html>
