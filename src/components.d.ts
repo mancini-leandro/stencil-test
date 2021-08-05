@@ -8,6 +8,10 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface TestRender {
     }
+    interface TestingProps {
+        "first": string;
+        "last": string;
+    }
 }
 declare global {
     interface HTMLTestRenderElement extends Components.TestRender, HTMLStencilElement {
@@ -16,15 +20,27 @@ declare global {
         prototype: HTMLTestRenderElement;
         new (): HTMLTestRenderElement;
     };
+    interface HTMLTestingPropsElement extends Components.TestingProps, HTMLStencilElement {
+    }
+    var HTMLTestingPropsElement: {
+        prototype: HTMLTestingPropsElement;
+        new (): HTMLTestingPropsElement;
+    };
     interface HTMLElementTagNameMap {
         "test-render": HTMLTestRenderElement;
+        "testing-props": HTMLTestingPropsElement;
     }
 }
 declare namespace LocalJSX {
     interface TestRender {
     }
+    interface TestingProps {
+        "first"?: string;
+        "last"?: string;
+    }
     interface IntrinsicElements {
         "test-render": TestRender;
+        "testing-props": TestingProps;
     }
 }
 export { LocalJSX as JSX };
@@ -32,6 +48,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "test-render": LocalJSX.TestRender & JSXBase.HTMLAttributes<HTMLTestRenderElement>;
+            "testing-props": LocalJSX.TestingProps & JSXBase.HTMLAttributes<HTMLTestingPropsElement>;
         }
     }
 }

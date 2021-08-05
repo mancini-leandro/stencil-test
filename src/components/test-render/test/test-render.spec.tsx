@@ -7,14 +7,14 @@ describe('test-render', () => {
   beforeEach(async () => {
     page = await newSpecPage({
       html: `<test-render></test-render>`,
-      components: [TestRender],
-      supportsShadowDom: true
+      components: [TestRender]
     });
   });
 
   it('should render component', async () => {
     await page.waitForChanges();
 
+    expect(page.root.shadowRoot).toBeTruthy();
     expect(page.root.shadowRoot.querySelectorAll('li').length).toBe(7);
   });
 
