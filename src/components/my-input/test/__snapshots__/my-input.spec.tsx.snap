@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`my-input should input value 1`] = `
-<my-input value="Leandro Mancini">
-  <mock:shadow-root>
-    <input type="text" value="Leandro Mancini">
-  </mock:shadow-root>
-</my-input>
-`;
